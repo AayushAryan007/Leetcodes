@@ -10,12 +10,10 @@ public:
         while(n>0){
             
             int rem=n%16;
-            if(rem<10){
-                res+=rem+'0';
-            }
-            else{
+              
+          
                 res+=digit[rem];
-            }
+            
             n/=16;
             
         }
