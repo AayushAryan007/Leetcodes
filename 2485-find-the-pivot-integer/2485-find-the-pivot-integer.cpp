@@ -1,13 +1,26 @@
 class Solution {
  public:
   int pivotInteger(int n) {
-    // 1 + 2 + ... + x = x + ... + n
-    // (1 + x) * x / 2 = (x + n) * (n - x + 1) / 2
-    //         x + x^2 = nx - x^2 + x + n^2 - nx + n
-    //         2 * x^2 = n^2 + n
-    //               x = sqrt((n^2 + n) / 2)
-    const int y = (n * n + n) / 2;
-    const int x = sqrt(y);
-    return x * x == y ? x : -1;
+     int l=1, r=n;
+      int lsum=l, rsum=r;
+      
+      
+      if(n==1) return n;
+      
+      while(l<r){
+          if(lsum<rsum){
+              l++;
+              lsum+=l;
+          }
+          else{
+              r--;
+              rsum+=r;
+          }
+          
+          if(lsum==rsum and l+1==r-1){
+              return l+1;
+          } 
+      }
+      return -1;
   }
 };
