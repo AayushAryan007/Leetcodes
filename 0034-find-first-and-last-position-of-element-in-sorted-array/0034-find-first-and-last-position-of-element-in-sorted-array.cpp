@@ -1,94 +1,69 @@
-// class Solution {
-// public:
-//     vector<int> searchRange(vector<int>& nums, int target) {
-//         vector<int> result={-1,-1};
-        
-//         //first oocurence
-        
-//         int left=0;
-//         int right=nums.size()-1;
-        
-//         while(left<=right){
-//             int mid=left+(right-left)/2;
-            
-//             if(nums[mid]==target){
-//                 result[0]=mid;
-//                 right=mid-1;
-//             }
-//             else if( nums[mid]<target){
-//                 left=mid+1;
-//             }
-//             else
-//                 right=mid-1;
-//         }
-        
-//         //last occurance
-//          left = 0;
-//         right = nums.size() - 1;
-//         while (left <= right) {
-//             int mid = left + (right - left) / 2;
-//             if (nums[mid] == target) {
-//                 result[1] = mid;
-//                 left = mid + 1;   // Continue searching on the right side
-//             } else if (nums[mid] < target) {
-//                 left = mid + 1;
-//             } else {
-//                 right = mid - 1;
-//             }
-//         }
-
-//         return result;
-//     }
-// };
-
-
 class Solution {
 public:
-    vector<int> searchRange(vector<int>& nums, int target) {
+    
+    int firstocc(vector<int>&nums, int target, int n){
+        int l=0, h=n-1;
         
-        int beg=0; 
-        int last=0;
-        int flag=0;
-        int n=nums.size();
-        vector<int> ans;
-        for(int i=0;i<n;i++){
-            if(nums[i]==target)
-            {
-                if(flag==0)
-                {
-                    flag=1;
-                    last=i;
-                    beg=i;
-                }
-                else if(flag==1)
-                {
-                   last=i;
-                    
-                }
-                    
+        int ans=-1;
+        
+        while(l<=h){
+            int mid=(l+h)/2;
+            
+            if(nums[mid]==target){
+                ans=mid;
+                h=mid-1;
+                
             }
             
-            else if(nums[i]!=target){
-                if(flag==1)
-                   {
-                      break;}
-                
-                
+            else if(nums[mid]>target){
+                h=mid-1;
+            }
+            else{
+                l=mid+1;
             }
         }
         
-        if(flag==0)
-        {
-            ans.push_back(-1);
-            ans.push_back(-1);
-        }
-        else if(flag==1)
-        {
-            ans.push_back(beg);
-            ans.push_back(last);
-        }
-        
-        
         return ans;
+    }
+      int secondocc(vector<int>&nums, int target, int n){
+        int l=0, h=n-1;
+        
+        int ans=-1;
+        
+        while(l<=h){
+            int mid=(l+h)/2;
+            
+            if(nums[mid]==target){
+                ans=mid;
+                l=mid+1;
+                
+            }
+            
+            else if(nums[mid]>target){
+                h=mid-1;
+            }
+            else{
+                l=mid+1;
+            }
+        }
+          
+          return ans;
+    }
+    
+    
+    vector<int> searchRange(vector<int>& nums, int target) {
+        
+        int n=nums.size();
+        
+        int first= firstocc(nums,target,n);
+        int second = secondocc(nums,target,n);
+        
+        if(first!=-1 and second!=-1){
+            return {first,second};
+        }
+        else{
+            return {-1,-1};
+        }
+        
     }
 };
