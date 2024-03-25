@@ -7,7 +7,8 @@ public:
         
         for(auto i:nums){
            // result+= ceil(i/mid);
-            result += (i + mid - 1) / mid; 
+          //  result += (i + mid - 1) / mid; 
+            result += ceil((double)(i) / (double)(mid));
         }
         
         return result<=th;
