@@ -16,11 +16,11 @@ public:
                 if (mapT2S.find(charT) != mapT2S.end()) {
                     return false;
                 }
-                
+            }
              
                 mapS2T[charS] = charT;
                 mapT2S[charT] = charS;
-            }
+            
         }
         
         return true;
